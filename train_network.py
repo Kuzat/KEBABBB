@@ -47,15 +47,17 @@ random.shuffle(imagePaths)
 for imagePath in imagePaths:
 	# load the image, pre-process it, and store it in the data list
 	image = cv2.imread(imagePath)
-	image = cv2.resize(image, (28, 28))
-	image = img_to_array(image)
-	data.append(image)
-
-	# extract the class label from the image path and update the
-	# labels list
-	label = imagePath.split(os.path.sep)[-2]
-	label = 1 if label == "kebab" else 0
-	labels.append(label)
+	try:
+		image = cv2.resize(image, (28, 28))
+		image = img_to_array(image)
+		data.append(image)
+		# extract the class label from the image path and update the
+		# labels list
+		label = imagePath.split(os.path.sep)[-2]
+		label = 1 if label == "kebab" else 0
+		labels.append(label)
+	except:
+		print('[WARNING] failed to load:' + imagePath)
 
 # scale the raw pixel intensities to the range [0, 1]
 data = np.array(data, dtype="float") / 255.0
