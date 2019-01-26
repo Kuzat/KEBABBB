@@ -12,7 +12,7 @@ def main():
         i = 0
         urls = f.readlines()
         for url in urls:
-            filenameToCreate = directory + "/" + str(i) + ".jpg"
+            filenameToCreate = directory + "/" + "{:08d}".format(i) + ".jpg"
             print(url)
             print(filenameToCreate)
             try:
@@ -23,4 +23,6 @@ def main():
     else:
         print("Arguments are missing")
 
+#to run the program
+#python3 scriptname.py filenameForData DirectoryNameToSavePictures
 main()
